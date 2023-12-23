@@ -1,4 +1,3 @@
-import './App.css'
 import FirebaseCrudApp from './FirebaseCrudApp/FirebaseCrudApp'
 
 function App() {
