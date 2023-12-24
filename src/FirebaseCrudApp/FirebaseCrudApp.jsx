@@ -35,6 +35,7 @@ const FirebaseCrudApp = () => {
 	const createUserHandler = async () => {
 		await addDoc(usersCollectionRef, { name: userName, age: userAge });
 
+    // Reset input fields value
 		setUserAge('');
 		setUserName('');
 	};
@@ -44,7 +45,7 @@ const FirebaseCrudApp = () => {
 		// Get Specific Doc reference from DataBase
     const userDocRef = doc(db, 'users', id)
     // Create new object for the new doc fields
-    const newUserDoc = {age: age + 1}
+    const newUserDoc = {age: Number(age) + 1}
     // Update Doc in Database
     await updateDoc(userDocRef, newUserDoc)
 	};
@@ -60,11 +61,13 @@ const FirebaseCrudApp = () => {
 			<input
 				type='text'
 				placeholder='Enter your name'
+        value={userName}
 				onChange={(e) => setUserName(e.target.value)}
 			/>
 			<input
 				type='number'
 				placeholder='Enter your Age'
+        value={userAge}
 				onChange={(e) => setUserAge(e.target.value)}
 			/>
 			<button onClick={createUserHandler}>Create User</button>
