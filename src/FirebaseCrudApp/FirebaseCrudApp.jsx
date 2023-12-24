@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { db } from './firebase-config';
-import { addDoc, collection, doc, getDocs, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { useEffect } from 'react';
 
 const FirebaseCrudApp = () => {
@@ -46,6 +46,11 @@ const FirebaseCrudApp = () => {
     await updateDoc(userDocRef, newUserDoc)
 	};
 
+  // Function to delete specific user
+  const deleteSingleUser = async (id) => {
+    const userDocRef = doc(db, 'users', id)
+    await deleteDoc(userDocRef)
+  }
 
 	return (
 		<div>
@@ -73,6 +78,7 @@ const FirebaseCrudApp = () => {
 						>
 							increase age
 						</button>
+						<button onClick={() => deleteSingleUser(id)}>delete user</button>
 					</div>
 				);
 			})}
