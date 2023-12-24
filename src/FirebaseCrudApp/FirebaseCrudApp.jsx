@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { db } from './firebase-config';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { useEffect } from 'react';
 
 const FirebaseCrudApp = () => {
@@ -30,13 +30,23 @@ const FirebaseCrudApp = () => {
 
 	// Function that gets called when we create user
 	const createUserHandler = async () => {
-    await addDoc(usersCollectionRef, {name: userName, age: userAge})
+		await addDoc(usersCollectionRef, { name: userName, age: userAge });
 
-    setUserAge("")
-    setUserName("")
-  };
+		setUserAge('');
+		setUserName('');
+	};
 
-  
+	// Funcion to Update user age
+	const increaseAge = async (id, age) => {
+		// Get Specific Doc reference from DataBase
+    const userDocRef = doc(db, 'users', id)
+    // Create new object for the new doc fields
+    const newUserDoc = {age: age + 1}
+    // Update Doc in Database
+    await updateDoc(userDocRef, newUserDoc)
+	};
+
+
 	return (
 		<div>
 			<input
@@ -56,6 +66,13 @@ const FirebaseCrudApp = () => {
 					<div key={id}>
 						<h1>Name: {name}</h1>
 						<h1>Age: {age}</h1>
+						<button
+							onClick={() => {
+								increaseAge(id, age);
+							}}
+						>
+							increase age
+						</button>
 					</div>
 				);
 			})}
