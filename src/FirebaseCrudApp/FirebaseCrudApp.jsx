@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { db } from './firebase-config';
-import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, updateDoc } from 'firebase/firestore';
 import { useEffect } from 'react';
 
 const FirebaseCrudApp = () => {
@@ -14,13 +14,16 @@ const FirebaseCrudApp = () => {
 	useEffect(() => {
 		// Function to get Users from database
 		const getUsers = async () => {
-			const usersData = await getDocs(usersCollectionRef);
-			setUsers(
-				usersData.docs.map((usersData) => ({
-					...usersData.data(),
-					id: usersData.id,
-				})),
-			);
+			// const usersData = await getDocs(usersCollectionRef);
+      onSnapshot(usersCollectionRef, (snapshot) => {
+        setUsers(
+					snapshot.docs.map((userData) => ({
+						...userData.data(),
+						id: userData.id,
+					})),
+				);
+      })
+			
 		};
 
 		getUsers();
