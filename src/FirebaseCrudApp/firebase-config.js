@@ -13,6 +13,8 @@ const authDomain = import.meta.env.VITE_AUTH_DOMAIN;
 const messagingSenderId = import.meta.env.VITE_MESSAGING_SENDER_ID;
 const appId = import.meta.env.VITE_APP_ID;
 
+console.log(apiKey);
+
 // Project app's Firebase configuration
 const firebaseConfig = {
 	apiKey: `${apiKey}`,
