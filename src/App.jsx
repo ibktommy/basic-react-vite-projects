@@ -1,9 +1,10 @@
-import FirebaseCrudApp from './FirebaseCrudApp/FirebaseCrudApp'
+import FirebaseAuthDbApp from "./FirebaseAuthDbApp/components/FirebaseAuthDbApp"
+
 
 function App() {
   return (
     <>
-      <FirebaseCrudApp />
+      <FirebaseAuthDbApp />
     </>
   )
 }
