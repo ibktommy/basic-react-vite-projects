@@ -2,7 +2,7 @@
 import { initializeApp } from 'firebase/app';
 
 // Import the firebase authentication functions
-import { getAuth } from "firebase/auth"
+import { getAuth, GoogleAuthProvider } from "firebase/auth"
 
 // Import the firebase database functions
 import { getFirestore } from 'firebase/firestore';
@@ -12,8 +12,6 @@ const apiKey = import.meta.env.VITE_API_KEY;
 const authDomain = import.meta.env.VITE_AUTH_DOMAIN;
 const messagingSenderId = import.meta.env.VITE_MESSAGING_SENDER_ID;
 const appId = import.meta.env.VITE_APP_ID;
-
-console.log(apiKey);
 
 // Project app's Firebase configuration
 const firebaseConfig = {
@@ -34,6 +32,9 @@ export const auth = getAuth(app);
 
 // Create the variable for the database access
 export const db = getFirestore(app);
+
+// Initialize GoogleAuthProvider
+export const googleAuthProvider = new GoogleAuthProvider();
 
 
 
