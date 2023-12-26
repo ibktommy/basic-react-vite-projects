@@ -43,6 +43,7 @@ const Movies = () => {
 			setMovieTitle('');
 			setMovieReleaseDate('');
 			setMovieAward(false);
+			getMovies();
 			alert('Movie Submitted Successfully!');
 		} catch (err) {
 			alert(`${err}`)
