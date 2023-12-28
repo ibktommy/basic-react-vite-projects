@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { db } from '../../../FirebaseCrudApp/firebase-config';
 import { addDoc, collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import EditMovieModal from './editMovieModal';
 
 const Movies = () => {
 	const [movies, setMovies] = useState([]);
 	const [movieTitle, setMovieTitle] = useState('');
 	const [movieReleaseDate, setMovieReleaseDate] = useState('');
 	const [movieAward, setMovieAward] = useState('');
+	const [startEdit, setStartEdit] = useState(false)
 
 	// Handle Input Changes
 	function handleInputChange(inputState, inputEvent) {
@@ -100,6 +102,8 @@ const Movies = () => {
 					);
 				})}
 			</div>
+
+			<EditMovieModal />
 		</div>
 	);
 };
