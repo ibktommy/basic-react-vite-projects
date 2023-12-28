@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { db } from '../../../FirebaseCrudApp/firebase-config';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 const Movies = () => {
 	const [movies, setMovies] = useState([]);
@@ -54,6 +54,13 @@ const Movies = () => {
 		getMovies();
 	}, []);
 
+	// Delete a movie-item from the movies-collection
+	async function deleteMovie(id) {
+		const movieRef = doc(db, 'movies', id)
+		await deleteDoc(movieRef)
+		getMovies()
+	}
+
 	return (
 		<div className='movies'>
 			<div className='movie-input'>
@@ -88,6 +95,7 @@ const Movies = () => {
 							<h1>{title.charAt(0).toUpperCase() + title.slice(1)}</h1>
 							<h4>{release_date}</h4>
 							<p>{win_oscar ? 'Won Oscar' : 'No Oscar'}</p>
+							<button onClick={() => deleteMovie(id)}>delete movie</button>
 						</article>
 					);
 				})}
