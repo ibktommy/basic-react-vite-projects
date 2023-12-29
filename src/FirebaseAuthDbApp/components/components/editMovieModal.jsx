@@ -1,4 +1,5 @@
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+/* eslint-disable react/prop-types */
+import { doc, updateDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import { db } from '../../../FirebaseCrudApp/firebase-config';
 
